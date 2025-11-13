@@ -1,17 +1,15 @@
 @font-face{
-  font-family:'GangwonEdu';
-  src:url('../assets/font/GangwonEduSaeeum-Medium.woff2') format('woff2'),
-      url('../assets/font/GangwonEduSaeeum-Medium.woff') format('woff');
-  font-display:swap;
+    font-family:'GangwonEdu';
+    src:url('../assets/font/GangwonEduSaeeum-Medium.woff2') format('woff2'),
+        url('../assets/font/GangwonEduSaeeum-Medium.woff') format('woff');
+    font-display:swap;
 }
 
 /* ------------------ 고정 베이스 ------------------ */
 :root{
-  /* 좌석/간격 - 고정값 */
   --seat:32px;
   --gap:8px;
 
-  /* 색상 */
   --seat-radius:8px;
   --fg:#CFE1F1;
   --bg:#0F1024;
@@ -20,11 +18,9 @@
   --seat-using:#A06AAE;
   --power:#FFD600;
 
-  /* 행 간격 / 블록 간격 */
   --row-gap:56px;
   --middle-gap:80px;
 
-  /* 기준 열 수 (A/B) */
   --left-cols:9;
   --right-cols:6;
 }
@@ -37,7 +33,6 @@ body{
   color:#fff;
   font-family:'GangwonEdu',system-ui,sans-serif;
 
-  /* 폰트 렌더링 보정 */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -47,20 +42,19 @@ body{
 .viewport{
   display:flex; justify-content:flex-start; align-items:flex-start;
   width:100%; min-height:100vh;
-  overflow-x:auto;     /* 가로 스크롤 허용 (작은 화면에서 좌측 영역도 접근 가능) */
+  overflow-x:auto;
   overflow-y:visible;
   touch-action:pan-x;
   -webkit-overflow-scrolling:touch;
 }
 .main{
-  width:1280px;        /* 설계 기준 너비 */
-  min-width:1280px;    /* 가로 스크롤을 위해 최소값 고정 */
+  width:1280px;
+  min-width:1280px;
   padding:20px 16px 80px;
   transform-origin:top center;
   margin:0 auto;
 }
 
-/* 작은 화면일수록 스케일 다운 */
 @media (max-width:1366px){ .main{transform:scale(.95)}}
 @media (max-width:1200px){ .main{transform:scale(.90)}}
 @media (max-width:1024px){ .main{transform:scale(.85)}}
@@ -71,7 +65,9 @@ body{
 @media (max-width:375px) { .main{transform:scale(.60)}}
 
 /* ------------------ 전설 ------------------ */
-.legend{display:flex;gap:28px;align-items:center;font-size:28px;color:#ddd;justify-content:center}
+.legend{
+  display:flex;gap:28px;align-items:center;font-size:28px;color:#ddd;justify-content:center
+}
 .legend-item{display:flex;gap:8px;align-items:center}
 .lg{width:24px;height:24px;border-radius:6px;display:inline-block}
 .lg-power{border:4px solid var(--power)}
@@ -79,11 +75,11 @@ body{
 .lg-using{background:var(--seat-using);border:3px solid var(--seat-using)}
 .divider{height:3px;background:#2A2B47;border-radius:3px;margin:12px auto 24px;width:92%}
 
-/* ------------------ 한 행(줄) ------------------ */
+/* ------------------ 한 행 ------------------ */
 .rows{display:flex;flex-direction:column;gap:var(--row-gap);}
 .row{
   display:grid;
-  grid-template-columns: 90px 1fr 1fr; /* 라벨 / 왼블록 / 오른블록 */
+  grid-template-columns: 90px 1fr 1fr;
   align-items:start;
   column-gap:24px;
 }
@@ -96,10 +92,10 @@ body{
   font-size:60px;user-select:none;
 }
 
-/* 블록: 위/아래 2줄 */
+/* 블록 */
 .block{display:flex;flex-direction:column;gap:calc(var(--gap)*1.6)}
 
-/* 한 줄(line) – 열 수를 '기준 고정' */
+/* 한 줄(line) */
 .line{
   display:grid;
   grid-template-columns: repeat(var(--cols), var(--seat));
@@ -107,7 +103,7 @@ body{
   justify-content:center;
 }
 
-/* 좌석 칩 */
+/* 좌석칩 기본 */
 .seat{
   width:var(--seat);height:var(--seat);
   border-radius:var(--seat-radius);
@@ -116,27 +112,43 @@ body{
   color:var(--fg);
   display:flex;align-items:center;justify-content:center;
   font-size:24px;line-height:1;user-select:none;
-  transition:border-color .15s ease, transform .05s ease;
+  transition:border-color .15s ease, transform .05s ease, background .2s ease;
 }
 .seat:hover{border-color:#fff;cursor:pointer}
 
-/* 상태 */
-.seat.using{background:var(--seat-using);border-color:var(--seat-using)}
-.seat.power{background:transparent;border:4px solid var(--power)}
+/* 사용 중 */
+.seat.using{
+  background:var(--seat-using);
+  border-color:var(--seat-using);
+}
+
+/* 콘센트 좌석 (기본) */
+.seat.power{
+  background:transparent;
+  border:4px solid var(--power);
+  color:var(--fg);
+}
+
+/* 🔥 콘센트 + 사용중 → 노란 테두리 유지 + 내부 보라색 */
+.seat.power.using{
+  background:var(--seat-using) !important;
+  border:4px solid var(--power) !important;
+}
+
+/* 투명 좌석(공간 맞추기) */
 .seat.ghost{
   pointer-events:none;
   background:transparent;border-color:transparent;color:transparent;
 }
 
-/* 디버그: ghost 가시화 (원할 때 body에 debug-ghosts 클래스 추가) */
+/* 디버그 (원하면 body에 debug-ghosts 추가) */
 .debug-ghosts .seat.ghost{
   background:rgba(0,255,120,.05);
   border:2px dashed rgba(0,255,120,.6);
   color:#0f0;
 }
 
-
-/* 입구 박스 */
+/* 입구 */
 .divider2 {
   margin: 50px auto;
   height: 100px;
@@ -144,11 +156,10 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #2A2B47;  /* 배경색 (원하면 지워도 됨) */
+  background: #2A2B47;
   border-radius: 8px;
 }
-
 .divider2 span {
   font-size: 50px;
-  color: #fff; /* 글자색 */
+  color: #fff;
 }
