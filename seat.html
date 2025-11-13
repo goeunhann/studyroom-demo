@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>제 1 열람실 – 좌석 상세 (데모)</title>
+
+  <link rel="stylesheet" href="css/seat-detail.css" />
+  <link rel="preload" href="assets/font/GangwonEduSaeeum-Medium.woff2"
+        as="font" type="font/woff2" crossorigin>
+
+  <!-- 데모용 상세 스크립트 -->
+  <script defer src="js/seat-detail-demo.js"></script>
+</head>
+<body>
+  <main class="seat-wrapper">
+    <a href="index.html" class="room-title-box">
+      <h2 class="room-title">제 1 열람실</h2>
+    </a>
+
+    <div class="seat-image">
+      <img id="seat-img" src="assets/img/desk_empty.png" alt="좌석 이미지">
+    </div>
+
+    <div class="seat-info">
+      <div class="info-box">
+        <p class="info-title">좌석 번호</p>
+        <p id="seat-id" class="info-value">A1</p>
+      </div>
+      <div class="info-box">
+        <p class="info-title">좌석 상태</p>
+        <p id="status-text" class="info-value status-empty">비어 있음</p>
+      </div>
+      <div class="info-box">
+        <p class="info-title">입/퇴실 시간</p>
+        <p id="timestamp" class="info-value"></p>
+      </div>
+    </div>
+
+    <button id="action-btn" class="btn-enter">입실</button>
+  </main>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>제 1 열람실 (데모)</title>
+
+  <!-- 메인 CSS -->
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- 폰트 미리 불러오기 -->
+  <link rel="preload" href="assets/font/GangwonEduSaeeum-Medium.woff2"
+        as="font" type="font/woff2" crossorigin>
+
+  <!-- 데모용 좌석 스크립트 -->
+  <script defer src="js/seats-demo.js"></script>
+</head>
+<body>
+  <!-- 더미(ghost) 좌석 시각 확인하려면 body에 debug-ghosts 클래스를 추가 -->
+  <!-- <body class="debug-ghosts"> -->
+
+  <div class="viewport">
+    <main class="main">
+      <!-- 전설 -->
+      <div class="legend" style="margin: 50px;">
+        <span class="legend-item">
+          <span class="lg lg-power"></span> : 콘센트
+        </span>
+        <span class="legend-item">
+          <span class="lg lg-empty"></span> : 비어 있음
+        </span>
+        <span class="legend-item">
+          <span class="lg lg-using"></span> : 사용 중
+        </span>
+      </div>
+      <div class="divider" style="margin: 50px;"></div>
+
+      <!-- 한 줄(행) = [라벨, 왼블록, 오른블록] 3덩어리 -->
+      <section id="rows" class="rows"></section>
+      
+      <div class="divider2">
+        <span>입구</span>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
